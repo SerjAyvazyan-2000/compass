@@ -35,25 +35,25 @@ export const Home = () => {
     const {profile} = useContext(ProfileContext)
 
 
-    const [,] = useDebounce(
-        async () => {
-            setLoading(true);
-            try {
-                if (selectedCategories.length === 0) {
-                    return;
-                }
-                const {places} = await fetchPlacesByCategory(selectedCategories);
-
-                setPlaces(places);
-            } catch (error) {
-                console.error(error);
-            } finally {
-                setLoading(false);
-            }
-        },
-        1000,
-        [selectedCategories]
-    );
+    // const [,] = useDebounce(
+    //     async () => {
+    //         setLoading(true);
+    //         try {
+    //             if (selectedCategories.length === 0) {
+    //                 return;
+    //             }
+    //             const {places} = await fetchPlacesByCategory(selectedCategories);
+    //
+    //             setPlaces(places);
+    //         } catch (error) {
+    //             console.error(error);
+    //         } finally {
+    //             setLoading(false);
+    //         }
+    //     },
+    //     1000,
+    //     [selectedCategories]
+    // );
 
 
     useEffect(() => {
@@ -98,19 +98,19 @@ export const Home = () => {
         }
     }, []);
 
-    useEffect(() => {
-        async function getRecommendedPlaces() {
-            try {
-                const {places, lastVisible} =
-                    await fetchRecommendedPlacesWithPagination();
-                setRecommendedPlaces(places);
-            } catch (error) {
-                console.log(error);
-            }
-        }
-
-        getRecommendedPlaces();
-    }, []);
+    // useEffect(() => {
+    //     async function getRecommendedPlaces() {
+    //         try {
+    //             const {places, lastVisible} =
+    //                 await fetchRecommendedPlacesWithPagination();
+    //             setRecommendedPlaces(places);
+    //         } catch (error) {
+    //             console.log(error);
+    //         }
+    //     }
+    //
+    //     getRecommendedPlaces();
+    // }, []);
 
 
     useEffect(() => {

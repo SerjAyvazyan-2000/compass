@@ -12,31 +12,31 @@ import {
 import { getDatabase, ref, get } from "firebase/database";
 
 
-// const fetchRecommendedPlacesWithPagination = async (lastVisibleDoc = null) => {
-//   const placesRef = collection(db, "places");
-//   let q = query(placesRef, orderBy("rating",'desc'), limit(10));
-//
-//   if (lastVisibleDoc) {
-//     q = query(q, startAfter(lastVisibleDoc));
-//   }
-//
-//   const snapshot = await getDocs(q);
-//
-//   if (!snapshot) {
-//     return { places: [], lastVisible: null };
-//   }
-//
-//   const places = [];
-//   snapshot.forEach((childSnapshot) => {
-//     places.push({
-//       id: childSnapshot.id,
-//       ...childSnapshot.data(),
-//     });
-//   });
-//
-//   const lastVisible = places[places.length - 1]?.id;
-//   return { places, lastVisible };
-// };
+const fetchRecommendedPlacesWithPagination = async (lastVisibleDoc = null) => {
+  const placesRef = collection(db, "places");
+  let q = query(placesRef, orderBy("rating",'desc'), limit(10));
+
+  if (lastVisibleDoc) {
+    q = query(q, startAfter(lastVisibleDoc));
+  }
+
+  const snapshot = await getDocs(q);
+
+  if (!snapshot) {
+    return { places: [], lastVisible: null };
+  }
+
+  const places = [];
+  snapshot.forEach((childSnapshot) => {
+    places.push({
+      id: childSnapshot.id,
+      ...childSnapshot.data(),
+    });
+  });
+
+  const lastVisible = places[places.length - 1]?.id;
+  return { places, lastVisible };
+};
 
 const fetchPlacesWithPagination = async (lastVisibleDoc = null) => {
   const placesRef = collection(db, "places");
@@ -105,42 +105,42 @@ async function getLastFeedsPagination(lastVisible = null) {
   };
 }
 
-// const fetchPlacesByCategory = async (
-//   categories = [],
-//   lastVisibleDoc = null
-// ) => {
-//   const placesRef = collection(db, "places");
-//
-//   let q = query(placesRef, orderBy("rating",'desc'));
-//
-//   if (lastVisibleDoc) {
-//     q = query(q, startAfter(lastVisibleDoc));
-//   }
-//
-//   const snapshot = await getDocs(q);
-//
-//   if (!snapshot) {
-//     return { places: [], lastVisible: null };
-//   }
-//
-//   const places = [];
-//   snapshot.forEach((childSnapshot) => {
-//     places.push({
-//       id: childSnapshot.id,
-//       ...childSnapshot.data(),
-//     });
-//   });
-//
-//   const filteredPlaces = places.filter((place) =>
-//     categories.includes(place.category)
-//   );
-//
-//   const lastVisible =
-//     filteredPlaces.length > 0
-//       ? filteredPlaces[filteredPlaces.length - 1]?.id
-//       : null;
-//   return { places: filteredPlaces, lastVisible };
-// };
+const fetchPlacesByCategory = async (
+  categories = [],
+  lastVisibleDoc = null
+) => {
+  const placesRef = collection(db, "places");
+
+  let q = query(placesRef, orderBy("rating",'desc'));
+
+  if (lastVisibleDoc) {
+    q = query(q, startAfter(lastVisibleDoc));
+  }
+
+  const snapshot = await getDocs(q);
+
+  if (!snapshot) {
+    return { places: [], lastVisible: null };
+  }
+
+  const places = [];
+  snapshot.forEach((childSnapshot) => {
+    places.push({
+      id: childSnapshot.id,
+      ...childSnapshot.data(),
+    });
+  });
+
+  const filteredPlaces = places.filter((place) =>
+    categories.includes(place.category)
+  );
+
+  const lastVisible =
+    filteredPlaces.length > 0
+      ? filteredPlaces[filteredPlaces.length - 1]?.id
+      : null;
+  return { places: filteredPlaces, lastVisible };
+};
 
 
 
@@ -296,10 +296,10 @@ const fetchCollections = async () => {
 
 export {
   fetchPlacesWithPagination,
-  // fetchRecommendedPlacesWithPagination,
+  fetchRecommendedPlacesWithPagination,
   getLastFeedsPagination,
   fetchCollections,
-  // fetchPlacesByCategory,
+  fetchPlacesByCategory,
   fetchAllPlaces,
   fetchCategories
 };
