@@ -14,9 +14,7 @@ import {Spinner} from "@/common/Spinner";
 import {
     fetchAllPlaces,
     fetchCategories, fetchCollections,
-    fetchPlacesByCategory,
     fetchPlacesWithPagination,
-    fetchRecommendedPlacesWithPagination,
 } from "@/utils/fetch-paginations";
 import {useDebounce} from "react-use";
 import {db} from "../../../firebase/config";
